@@ -282,6 +282,16 @@
       gap:8px;
     }
 
+    .active-like {
+      background: rgba(34,197,94,0.35) !important;
+      border: 1px solid rgba(34,197,94,0.5);
+    }
+
+    .active-dislike {
+      background: rgba(239,68,68,0.35) !important;
+      border: 1px solid rgba(239,68,68,0.5);
+    }
+
     .like-btn:hover {
       background: rgba(34,197,94,0.25);
     }
@@ -341,8 +351,8 @@
   <div style="max-width:1200px;margin:auto;padding:10px 20px 0 20px;">
     <div style="margin-bottom:18px;background:rgba(31,41,55,0.85);padding:18px;border-radius:24px;border:1px solid rgba(255,255,255,0.06);overflow:hidden;">
       <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <h2>Featured Games</h2>
-        <p style="color:#93c5fd;">Trending Now</p>
+        <h2>Top Rated Games</h2>
+        <p style="color:#93c5fd;">Most Liked</p>
       </div>
 
       <div class="slider">
@@ -351,20 +361,6 @@
           <img src="https://upload.wikimedia.org/wikipedia/en/8/8b/Baldi%27s_Basics_cover.jpg" class="slide-img">
           <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2231450/header.jpg" class="slide-img">
           <img src="https://play-lh.googleusercontent.com/GdCAR2R1l0cWlKjv8s0VhX0zYzT7KQ8zTz0nG0L7d5Hj4I7w6p7u0VY0WQYbT8R4gA" class="slide-img">
-        <div class="rating-bar">
-          <button class="like-btn" onclick="likeGame(this)">
-            <span class="emoji">👍</span>
-            <span class="label">Like</span>
-            <span class="count">0</span>
-          </button>
-
-          <button class="dislike-btn" onclick="dislikeGame(this)">
-            <span class="emoji">👎</span>
-            <span class="label">Dislike</span>
-            <span class="count">0</span>
-          </button>
-        </div>
-
         <div style="display:flex;gap:10px;margin-top:12px;">
           <button class="like-btn" onclick="likeGame(this)">👍 <span>0</span></button>
           <button class="dislike-btn" onclick="dislikeGame(this)">👎 <span>0</span></button>
@@ -379,7 +375,17 @@
       <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/32/Grass_Block_JE7_BE6.png" alt="Eaglercraft">
       <div class="game-info">
         <h3>Eaglercraft</h3>
-        <a class="play-btn" href="#" onclick="openGame('https://eaglercraft.com/')">Play Now</a>
+        <a class="play-btn" href="#" onclick="openGame('https://example.com')">Play Now</a>
+
+        <div class="rating-bar">
+          <button class="like-btn" onclick="voteGame(this, 'like')">
+            👍 Like <span class="count">0</span>
+          </button>
+
+          <button class="dislike-btn" onclick="voteGame(this, 'dislike')">
+            👎 Dislike <span class="count">0</span>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -388,6 +394,16 @@
       <div class="game-info">
         <h3>Pizza Tower Demo</h3>
         <a class="play-btn" href="#" onclick="openGame('https://example.com')">Play Now</a>
+
+        <div class="rating-bar">
+          <button class="like-btn" onclick="voteGame(this, 'like')">
+            👍 Like <span class="count">0</span>
+          </button>
+
+          <button class="dislike-btn" onclick="voteGame(this, 'dislike')">
+            👎 Dislike <span class="count">0</span>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -396,6 +412,16 @@
       <div class="game-info">
         <h3>Baldi's Basics</h3>
         <a class="play-btn" href="#" onclick="openGame('https://example.com')">Play Now</a>
+
+        <div class="rating-bar">
+          <button class="like-btn" onclick="voteGame(this, 'like')">
+            👍 Like <span class="count">0</span>
+          </button>
+
+          <button class="dislike-btn" onclick="voteGame(this, 'dislike')">
+            👎 Dislike <span class="count">0</span>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -404,6 +430,16 @@
       <div class="game-info">
         <h3>Slope</h3>
         <a class="play-btn" href="#" onclick="openGame('https://example.com')">Play Now</a>
+
+        <div class="rating-bar">
+          <button class="like-btn" onclick="voteGame(this, 'like')">
+            👍 Like <span class="count">0</span>
+          </button>
+
+          <button class="dislike-btn" onclick="voteGame(this, 'dislike')">
+            👎 Dislike <span class="count">0</span>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -412,6 +448,16 @@
       <div class="game-info">
         <h3>Retro Bowl</h3>
         <a class="play-btn" href="#" onclick="openGame('https://example.com')">Play Now</a>
+
+        <div class="rating-bar">
+          <button class="like-btn" onclick="voteGame(this, 'like')">
+            👍 Like <span class="count">0</span>
+          </button>
+
+          <button class="dislike-btn" onclick="voteGame(this, 'dislike')">
+            👎 Dislike <span class="count">0</span>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -420,6 +466,16 @@
       <div class="game-info">
         <h3>Drift Boss</h3>
         <a class="play-btn" href="#" onclick="openGame('https://example.com')">Play Now</a>
+
+        <div class="rating-bar">
+          <button class="like-btn" onclick="voteGame(this, 'like')">
+            👍 Like <span class="count">0</span>
+          </button>
+
+          <button class="dislike-btn" onclick="voteGame(this, 'dislike')">
+            👎 Dislike <span class="count">0</span>
+          </button>
+        </div>
       </div>
     </div>
 
@@ -478,24 +534,58 @@
       frame.src = '';
     }
 
-    function likeGame(btn) {
-      const count = btn.querySelector('.count');
-      count.textContent = Number(count.textContent) + 1;
+    function voteGame(btn, type) {
+      const card = btn.closest('.game-card');
+      const likeBtn = card.querySelector('.like-btn');
+      const dislikeBtn = card.querySelector('.dislike-btn');
 
-      btn.style.transform = 'scale(1.05)';
-      setTimeout(() => {
-        btn.style.transform = 'scale(1)';
-      }, 120);
+      const likeCount = likeBtn.querySelector('.count');
+      const dislikeCount = dislikeBtn.querySelector('.count');
+
+      let voted = card.dataset.vote || '';
+
+      if (type === 'like') {
+        if (voted === 'like') return;
+
+        if (voted === 'dislike') {
+          dislikeCount.textContent = Number(dislikeCount.textContent) - 1;
+          dislikeBtn.classList.remove('active-dislike');
+        }
+
+        likeCount.textContent = Number(likeCount.textContent) + 1;
+        likeBtn.classList.add('active-like');
+        dislikeBtn.classList.remove('active-dislike');
+        card.dataset.vote = 'like';
+      }
+
+      if (type === 'dislike') {
+        if (voted === 'dislike') return;
+
+        if (voted === 'like') {
+          likeCount.textContent = Number(likeCount.textContent) - 1;
+          likeBtn.classList.remove('active-like');
+        }
+
+        dislikeCount.textContent = Number(dislikeCount.textContent) + 1;
+        dislikeBtn.classList.add('active-dislike');
+        likeBtn.classList.remove('active-like');
+        card.dataset.vote = 'dislike';
+      }
+
+      sortGames();
     }
 
-    function dislikeGame(btn) {
-      const count = btn.querySelector('.count');
-      count.textContent = Number(count.textContent) + 1;
+    function sortGames() {
+      const grid = document.getElementById('gamesGrid');
+      const cards = [...document.querySelectorAll('.game-card')];
 
-      btn.style.transform = 'scale(1.05)';
-      setTimeout(() => {
-        btn.style.transform = 'scale(1)';
-      }, 120);
+      cards.sort((a, b) => {
+        const aLikes = Number(a.querySelector('.like-btn .count').textContent);
+        const bLikes = Number(b.querySelector('.like-btn .count').textContent);
+        return bLikes - aLikes;
+      });
+
+      cards.forEach(card => grid.appendChild(card));
     }
 
     function filterGames(category) {
@@ -511,8 +601,3 @@
 
 </body>
 </html>
-
-
-</body>
-</html>
-
