@@ -1,701 +1,365 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Arcadex</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arcadex</title>
 
-    body {
-      background: radial-gradient(circle at top, #18233f 0%, #0a0f1f 55%, #050816 100%);
-      color: white;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, sans-serif;
+}
 
-    .bg-orbs {
-      position: fixed;
-      inset: 0;
-      overflow: hidden;
-      z-index: -1;
-    }
+body{
+  background:#0b1020;
+  color:white;
+}
 
-    .orb {
-      position: absolute;
-      border-radius: 50%;
-      filter: blur(80px);
-      opacity: 0.22;
-      animation: float 12s ease-in-out infinite;
-    }
+header{
+  position:sticky;
+  top:0;
+  z-index:100;
+  background:#10182f;
+  border-bottom:1px solid rgba(255,255,255,0.08);
+  padding:14px 20px;
+}
 
-    .orb1 {
-      width: 320px;
-      height: 320px;
-      background: #3b82f6;
-      top: -80px;
-      left: -40px;
-    }
+.topbar{
+  max-width:1400px;
+  margin:auto;
+  display:flex;
+  gap:20px;
+  align-items:center;
+}
 
-    .orb2 {
-      width: 260px;
-      height: 260px;
-      background: #8b5cf6;
-      right: 10%;
-      top: 30%;
-    }
+.logo{
+  font-size:2rem;
+  font-weight:900;
+  color:#7c8cff;
+}
 
-    .orb3 {
-      width: 300px;
-      height: 300px;
-      background: #06b6d4;
-      bottom: -100px;
-      left: 30%;
-    }
+.search{
+  flex:1;
+}
 
-    @keyframes float {
-      0%,100% { transform: translateY(0px); }
-      50% { transform: translateY(-25px); }
-    }
+.search input{
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#1a2547;
+  color:white;
+  font-size:1rem;
+}
 
-    header {
-      background: rgba(15, 23, 42, 0.95);
-      padding: 28px;
-      text-align: center;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(10px);
-      position: sticky;
-      top: 0;
-      z-index: 50;
-    }
+main{
+  max-width:1400px;
+  margin:auto;
+  padding:20px;
+}
 
-    header h1 {
-      font-size: 3rem;
-      background: linear-gradient(90deg, #60a5fa, #a78bfa);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      font-weight: 900;
-      letter-spacing: 1px;
-    }
+.top-game{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:20px;
+  background:#11192f;
+  border:1px solid rgba(255,255,255,0.06);
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:25px;
+}
 
-    header p {
-      color: #cbd5e1;
-      margin-top: 5px;
-    }
+.top-game img{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+}
 
-    .search-box {
-      margin: 20px auto;
-      width: 90%;
-      max-width: 500px;
-    }
+.top-info{
+  padding:25px;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+}
 
-    .search-box input {
-      width: 100%;
-      box-shadow: 0 10px 25px rgba(59,130,246,0.25);
-      padding: 12px;
-      border: none;
-      border-radius: 12px;
-      background: #374151;
-      color: white;
-      font-size: 1rem;
-    }
+.top-info h2{
+  font-size:2.5rem;
+  margin-bottom:10px;
+}
 
-    .games-grid {
-      max-width: 1400px;
-      margin: auto;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 20px;
-      padding: 20px;
-    }
+.top-info p{
+  color:#b6bdd3;
+  line-height:1.6;
+  margin-bottom:20px;
+}
 
-     .game-card {
-      transform-style: preserve-3d;
-      overflow: hidden;
-      background: rgba(31, 41, 55, 0.9);
-      border-radius: 24px;
-      overflow: hidden;
-      transition: 0.25s ease;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.35);
-      border: 1px solid rgba(255,255,255,0.06);
-      backdrop-filter: blur(12px);
-    }
+.play-btn{
+  padding:14px;
+  border:none;
+  border-radius:12px;
+  background:#5865f2;
+  color:white;
+  font-weight:bold;
+  cursor:pointer;
+  font-size:1rem;
+}
 
-     .game-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(59,130,246,0.25);
-      border-color: rgba(96,165,250,0.35);
-    }
+.play-btn:hover{
+  background:#7380ff;
+}
 
-    .game-card {
-      position: relative;
-    }
+.vote-box{
+  display:flex;
+  gap:15px;
+  margin-top:20px;
+}
 
-    .game-card::before {
-      content: '';
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
-      z-index: 1;
-      pointer-events: none;
-    }
+.vote{
+  flex:1;
+  background:#1a2547;
+  padding:14px;
+  border-radius:14px;
+  text-align:center;
+}
 
-    .game-banner {
-      position: relative;
-      overflow: hidden;
-    }
+.vote h3{
+  font-size:1.6rem;
+}
 
-    .game-banner::after {
-      content:'';
-      position:absolute;
-      inset:0;
-      background:linear-gradient(to top, rgba(5,8,22,0.95), transparent 55%);
-    }
+.games-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:18px;
+}
 
-    .game-card img {
-      width: 100%;
-      height: 140px;
-      object-fit: cover;
-    }
+.game-card{
+  background:#11192f;
+  border-radius:18px;
+  overflow:hidden;
+  border:1px solid rgba(255,255,255,0.06);
+  transition:0.15s;
+}
 
-    .game-info {
-      padding-top: 8px;
-      position: relative;
-      z-index: 2;
-      padding: 15px;
-    }
+.game-card:hover{
+  transform:translateY(-4px);
+}
 
-    .game-info h3 {
-      margin-bottom: 10px;
-      color: #93c5fd;
-    }
+.game-card img{
+  width:100%;
+  height:140px;
+  object-fit:cover;
+}
 
-     .play-btn {
-      position: relative;
-      overflow: hidden;
-      display: inline-block;
-      padding: 12px 18px;
-      background: linear-gradient(90deg, #2563eb, #7c3aed);
-      border-radius: 14px;
-      color: white;
-      text-decoration: none;
-      transition: 0.2s ease;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      font-weight: bold;
-      width: 100%;
-      text-align: center;
-    }
+.card-content{
+  padding:14px;
+}
 
-    .play-btn::before {
-      content:'';
-      position:absolute;
-      top:0;
-      left:-120%;
-      width:100%;
-      height:100%;
-      background:linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-      transition:0.5s;
-    }
+.card-content h3{
+  margin-bottom:10px;
+}
 
-    .play-btn:hover::before {
-      left:120%;
-    }
+.rating-row{
+  display:flex;
+  justify-content:space-between;
+  margin-top:12px;
+  color:#b6bdd3;
+  font-size:0.95rem;
+}
 
-    .play-btn:hover {
-      background: #3b82f6;
-    }
+.like{
+  color:#4ade80;
+}
 
-    footer {
-      text-align: center;
-      padding: 20px;
-      color: #94a3b8;
-    }
+.dislike{
+  color:#f87171;
+}
 
-    .filter-btn {
-      padding: 10px 18px;
-      border: none;
-      border-radius: 999px;
-      background: #2563eb;
-      color: white;
-      cursor: pointer;
-      transition: 0.2s ease;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-      font-weight: bold;
-    }
+.modal{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,0.8);
+  display:none;
+  align-items:center;
+  justify-content:center;
+  z-index:999;
+}
 
-    .filter-btn:hover {
-      background: #3b82f6;
-    }
+.modal-content{
+  width:95%;
+  height:92%;
+  background:#000;
+  border-radius:18px;
+  overflow:hidden;
+  display:flex;
+  flex-direction:column;
+}
 
-    .modal {
-      position: fixed;
-      inset: 0;
-      background: rgba(0,0,0,0.8);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      z-index: 999;
-    }
+.modal-top{
+  background:#11192f;
+  padding:12px;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
 
-    .modal-content {
-      width: 96%;
-      height: 94%;
-      background: #0b1020;
-      border-radius: 30px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 0 60px rgba(0,0,0,0.6);
-      border: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(20px);
-    }
+iframe{
+  flex:1;
+  border:none;
+}
 
-    .fullscreen-btn {
-      background: linear-gradient(90deg,#2563eb,#7c3aed);
-      border: none;
-      color: white;
-      padding: 10px 16px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: bold;
-    }
+.close-btn{
+  background:#ef4444;
+  border:none;
+  color:white;
+  padding:10px 16px;
+  border-radius:10px;
+  cursor:pointer;
+}
 
-    .modal-content-old {
-      width: 90%;
-      height: 85%;
-      background: #111827;
-      border-radius: 20px;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      box-shadow: 0 0 30px rgba(0,0,0,0.5);
-    }
-
-    .modal-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 15px;
-      background: #1f2937;
-    }
-
-    .close-btn {
-      background: crimson;
-      color: white;
-      border: none;
-      padding: 10px 15px;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-
-     .slider {
-      overflow: hidden;
-      width: 100%;
-      border-radius: 18px;
-    }
-
-    .slide-track {
-      display: flex;
-      gap: 16px;
-      animation: scrollSlider 18s linear infinite;
-      width: max-content;
-    }
-
-    .slide-img {
-      width: 260px;
-      height: 140px;
-      object-fit: cover;
-      border-radius: 18px;
-      border: 2px solid rgba(255,255,255,0.08);
-    }
-
-    @keyframes scrollSlider {
-      from {
-        transform: translateX(0);
-      }
-      to {
-        transform: translateX(-50%);
-      }
-    }
-
-    .cube-card {
-      border-radius: 28px;
-    }
-
-    .cube-card img {
-      height: 220px;
-      object-fit: cover;
-    }
-
-    .rating-bar {
-      background: rgba(255,255,255,0.03);
-      border: 1px solid rgba(255,255,255,0.05);
-      padding: 10px;
-      border-radius: 18px;
-      display: flex;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .like-btn, .dislike-btn {
-      backdrop-filter: blur(10px);
-      flex: 1;
-      border: none;
-      padding: 10px;
-      border-radius: 12px;
-      cursor: pointer;
-      font-weight: bold;
-      background: rgba(255,255,255,0.08);
-      color: white;
-      transition: 0.2s ease;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap:8px;
-    }
-
-    .active-like {
-      background: rgba(34,197,94,0.35) !important;
-      border: 1px solid rgba(34,197,94,0.5);
-    }
-
-    .active-dislike {
-      background: rgba(239,68,68,0.35) !important;
-      border: 1px solid rgba(239,68,68,0.5);
-    }
-
-    .like-btn:hover {
-      background: rgba(34,197,94,0.25);
-    }
-
-    .dislike-btn:hover {
-      background: rgba(239,68,68,0.25);
-    }
-
-    iframe {
-      flex: 1;
-      width: 100%;
-      border: none;
-      background: black;
-    }
-  </style>
+@media(max-width:900px){
+  .top-game{
+    grid-template-columns:1fr;
+  }
+}
+</style>
 </head>
+
 <body>
 
-  <div class="bg-orbs">
-    <div class="orb orb1"></div>
-    <div class="orb orb2"></div>
-    <div class="orb orb3"></div>
-  </div>
+<header>
+  <div class="topbar">
+    <div class="logo">Arcadex</div>
 
-  <header>
-    <h1>Arcadex</h1>
-    <p>Next-generation browser gaming platform</p>
-  </header>
-
-  <nav style="display:flex;justify-content:center;gap:15px;padding:18px;background:rgba(15,23,42,0.75);flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,0.06);">
-    <button class="filter-btn" onclick="filterGames('all')">All</button>
-    <button class="filter-btn" onclick="filterGames('action')">Action</button>
-    <button class="filter-btn" onclick="filterGames('retro')">Retro</button>
-    <button class="filter-btn" onclick="filterGames('horror')">Horror</button>
-    <button class="filter-btn" onclick="filterGames('sandbox')">Sandbox</button>
-  </nav>
-
-  <div style="max-width:1200px;margin:auto;padding-top:20px;">
-  <section style="display:grid;grid-template-columns:2fr 1fr;gap:20px;padding:20px;align-items:center;">
-    <div style="padding:30px;background:rgba(31,41,55,0.8);border-radius:28px;border:1px solid rgba(255,255,255,0.06);box-shadow:0 15px 40px rgba(0,0,0,0.35);">
-      <h2 style="font-size:3rem;margin-bottom:14px;font-weight:900;line-height:1.1;">The Ultimate Browser Arcade Experience</h2>
-      <p style="color:#cbd5e1;font-size:1.1rem;line-height:1.8;max-width:700px;">Arcadex delivers a polished gaming experience with immersive fullscreen play, animated UI, trending browser games, smooth transitions, and a modern premium interface designed to feel like a real gaming platform.</p>
-
-      <div style="display:flex;gap:14px;margin-top:24px;flex-wrap:wrap;">
-        <button style="padding:14px 22px;border:none;border-radius:16px;background:linear-gradient(90deg,#3b82f6,#8b5cf6);color:white;font-weight:800;font-size:1rem;cursor:pointer;box-shadow:0 10px 25px rgba(59,130,246,0.35);">Play Trending Games</button>
-        <button style="padding:14px 22px;border:1px solid rgba(255,255,255,0.1);border-radius:16px;background:rgba(255,255,255,0.04);color:white;font-weight:700;font-size:1rem;cursor:pointer;">Explore Library</button>
-      </div>
+    <div class="search">
+      <input type="text" id="searchInput" placeholder="Search games...">
     </div>
-
-    <div style="padding:24px;background:rgba(31,41,55,0.8);border-radius:28px;border:1px solid rgba(255,255,255,0.06);text-align:center;">
-      <h3 style="margin-bottom:10px;color:#93c5fd;">Trending</h3>
-      <p style="color:#e5e7eb;line-height:1.8;">Eaglercraft<br>Retro Bowl<br>Baldi's Basics<br>Slope</p>
-    </div>
-  </section>
-
-  <section style="padding:0 20px 10px 20px;max-width:1200px;margin:auto;">
-    <div style="background:rgba(31,41,55,0.85);padding:24px;border-radius:28px;border:1px solid rgba(255,255,255,0.06);box-shadow:0 15px 35px rgba(0,0,0,0.35);">
-      <h2 style="margin-bottom:15px;font-size:1.8rem;">Discover Games</h2>
-      <div class="search-box">
-    <input type="text" id="searchInput" placeholder="Search games..." />
   </div>
+</header>
 
-  <div style="max-width:1200px;margin:auto;padding:10px 20px 0 20px;">
-    <div style="margin-bottom:18px;background:rgba(31,41,55,0.85);padding:18px;border-radius:24px;border:1px solid rgba(255,255,255,0.06);overflow:hidden;">
-      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-        <h2>Top Rated Games</h2>
-        <p style="color:#93c5fd;">Most Liked</p>
+<main>
+
+<section class="top-game">
+  <img src="https://images.crazygames.com/games/smash-karts/cover-1654691343472.png" alt="Smash Karts">
+
+  <div class="top-info">
+    <h2>Smash Karts</h2>
+
+    <p>
+      Fast-paced multiplayer kart battles with weapons and online matches.
+    </p>
+
+    <button class="play-btn" onclick="openGame('https://example.com')">
+      Play Game
+    </button>
+
+    <div class="vote-box">
+      <div class="vote">
+        <h3 class="like">89%</h3>
+        <p>12,458 Likes</p>
       </div>
 
-      <div class="slider">
-        <div class="slide-track">
-          <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/32/Grass_Block_JE7_BE6.png" class="slide-img">
-          <img src="https://upload.wikimedia.org/wikipedia/en/8/8b/Baldi%27s_Basics_cover.jpg" class="slide-img">
-          <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2231450/header.jpg" class="slide-img">
-          <img src="https://play-lh.googleusercontent.com/GdCAR2R1l0cWlKjv8s0VhX0zYzT7KQ8zTz0nG0L7d5Hj4I7w6p7u0VY0WQYbT8R4gA" class="slide-img">
-        <div style="display:flex;gap:10px;margin-top:12px;">
-          <button class="like-btn" onclick="likeGame(this)">👍 <span>0</span></button>
-          <button class="dislike-btn" onclick="dislikeGame(this)">👎 <span>0</span></button>
-        </div>
+      <div class="vote">
+        <h3 class="dislike">11%</h3>
+        <p>1,554 Dislikes</p>
       </div>
     </div>
   </div>
+</section>
 
-  <section class="games-grid" id="gamesGrid">
+<section class="games-grid" id="gamesGrid">
 
-    <div class="game-card cube-card" data-category="sandbox">
-      <img src="https://static.wikia.nocookie.net/minecraft_gamepedia/images/3/32/Grass_Block_JE7_BE6.png" alt="Eaglercraft">
-      <div class="game-info">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-          <h3 style="font-size:1.35rem;">Eaglercraft</h3>
-          <span style="background:rgba(59,130,246,0.18);padding:6px 10px;border-radius:999px;font-size:0.8rem;color:#93c5fd;">Sandbox</span>
-        </div>
-        <p style="color:#94a3b8;line-height:1.6;margin-bottom:16px;">Multiplayer block-building adventure playable directly in your browser.</p>
-        <a class="play-btn" href="#" onclick="openGame('https://example.com')">Play Now</a>
-
-        <div class="rating-bar">
-          <button class="like-btn" onclick="voteGame(this, 'like')">
-            👍 Like <span class="count">0</span>
-          </button>
-
-          <button class="dislike-btn" onclick="voteGame(this, 'dislike')">
-            👎 Dislike <span class="count">0</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="game-card" data-category="retro">
-      <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2231450/header.jpg" alt="Pizza Tower">
-      <div class="game-info">
-        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-          <h3 style="font-size:1.35rem;">Pizza Tower Demo</h3>
-          <span style="background:rgba(168,85,247,0.18);padding:6px 10px;border-radius:999px;font-size:0.8rem;color:#c4b5fd;">Retro</span>
-        </div>
-        <p style="color:#94a3b8;line-height:1.6;margin-bottom:16px;">Fast chaotic platforming inspired by classic cartoon energy.</p>
-        <a class="play-btn" href="#" onclick="openGame('https://example.com')">Play Now</a>
-
-        <div class="rating-bar">
-          <button class="like-btn" onclick="voteGame(this, 'like')">
-            👍 Like <span class="count">0</span>
-          </button>
-
-          <button class="dislike-btn" onclick="voteGame(this, 'dislike')">
-            👎 Dislike <span class="count">0</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="game-card" data-category="horror">
-      <img src="https://upload.wikimedia.org/wikipedia/en/8/8b/Baldi%27s_Basics_cover.jpg" alt="Baldi's Basics">
-      <div class="game-info">
-        <h3>Baldi's Basics</h3>
-        <a class="play-btn" href="#" onclick="openGame('https://example.com')">Play Now</a>
-
-        <div class="rating-bar">
-          <button class="like-btn" onclick="voteGame(this, 'like')">
-            👍 Like <span class="count">0</span>
-          </button>
-
-          <button class="dislike-btn" onclick="voteGame(this, 'dislike')">
-            👎 Dislike <span class="count">0</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="game-card" data-category="action">
-      <img src="https://play-lh.googleusercontent.com/e7C4w4X7sJ5vT5x1nM7V5F7rKQm5Y5w7uQq7g5x5WQ"" alt="Slope">
-      <div class="game-info">
-        <h3>Slope</h3>
-        <a class="play-btn" href="#" onclick="openGame('https://example.com')">Play Now</a>
-
-        <div class="rating-bar">
-          <button class="like-btn" onclick="voteGame(this, 'like')">
-            👍 Like <span class="count">0</span>
-          </button>
-
-          <button class="dislike-btn" onclick="voteGame(this, 'dislike')">
-            👎 Dislike <span class="count">0</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="game-card" data-category="retro">
-      <img src="https://play-lh.googleusercontent.com/e4KxA4r7eKf4Q4h4K4f4K4f4K4f4K4f4K4f4K4f4K4f4" alt="Retro Bowl">
-      <div class="game-info">
-        <h3>Retro Bowl</h3>
-        <a class="play-btn" href="#" onclick="openGame('https://example.com')">Play Now</a>
-
-        <div class="rating-bar">
-          <button class="like-btn" onclick="voteGame(this, 'like')">
-            👍 Like <span class="count">0</span>
-          </button>
-
-          <button class="dislike-btn" onclick="voteGame(this, 'dislike')">
-            👎 Dislike <span class="count">0</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-    <div class="game-card" data-category="action">
-      <img src="https://play-lh.googleusercontent.com/vx7g4Q4g4Q4g4Q4g4Q4g4Q4g4Q4g4Q4g4Q4" alt="Drift Boss">
-      <div class="game-info">
-        <h3>Drift Boss</h3>
-        <a class="play-btn" href="#" onclick="openGame('https://example.com')">Play Now</a>
-
-        <div class="rating-bar">
-          <button class="like-btn" onclick="voteGame(this, 'like')">
-            👍 Like <span class="count">0</span>
-          </button>
-
-          <button class="dislike-btn" onclick="voteGame(this, 'dislike')">
-            👎 Dislike <span class="count">0</span>
-          </button>
-        </div>
-      </div>
-    </div>
-
-  </section>
-
-  <div class="modal" id="gameModal">
-    <div class="modal-content">
-      <div class="modal-top">
-        <h2 id="gameTitle">Now Playing</h2>
-        <div style="display:flex;gap:10px;">
-          <button class="fullscreen-btn" onclick="fullscreenGame()">Fullscreen</button>
-          <button class="close-btn" onclick="closeGame()">Close</button>
-        </div>
-      </div>
-      <iframe id="gameFrame" src=""></iframe>
+<div class="game-card">
+  <img src="https://images.crazygames.com/games/slope/cover-1589733217181.png">
+  <div class="card-content">
+    <h3>Slope</h3>
+    <button class="play-btn">Play</button>
+    <div class="rating-row">
+      <span class="like">👍 88%</span>
+      <span class="dislike">👎 12%</span>
     </div>
   </div>
+</div>
 
-  <footer>
-    <p>Made with HTML, CSS, and JavaScript</p>
-  </footer>
+<div class="game-card">
+  <img src="https://images.crazygames.com/games/1v1-lol/cover-1589887571080.png">
+  <div class="card-content">
+    <h3>1v1.LOL</h3>
+    <button class="play-btn">Play</button>
+    <div class="rating-row">
+      <span class="like">👍 86%</span>
+      <span class="dislike">👎 14%</span>
+    </div>
+  </div>
+</div>
 
-  <script>
-    const searchInput = document.getElementById('searchInput');
-    const gameCards = document.querySelectorAll('.game-card');
-    const modal = document.getElementById('gameModal');
-    const frame = document.getElementById('gameFrame');
+<div class="game-card">
+  <img src="https://images.crazygames.com/games/retro-bowl/cover-1674133099913.png">
+  <div class="card-content">
+    <h3>Retro Bowl</h3>
+    <button class="play-btn">Play</button>
+    <div class="rating-row">
+      <span class="like">👍 85%</span>
+      <span class="dislike">👎 15%</span>
+    </div>
+  </div>
+</div>
 
-    searchInput.addEventListener('input', () => {
-      const value = searchInput.value.toLowerCase();
+<div class="game-card">
+  <img src="https://images.crazygames.com/games/tunnel-rush/cover-1648041061062.png">
+  <div class="card-content">
+    <h3>Tunnel Rush</h3>
+    <button class="play-btn">Play</button>
+    <div class="rating-row">
+      <span class="like">👍 83%</span>
+      <span class="dislike">👎 17%</span>
+    </div>
+  </div>
+</div>
 
-      gameCards.forEach(card => {
-        const title = card.querySelector('h3').textContent.toLowerCase();
+<div class="game-card">
+  <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2231450/header.jpg">
+  <div class="card-content">
+    <h3>Pizza Tower Demo</h3>
+    <button class="play-btn">Play</button>
+    <div class="rating-row">
+      <span class="like">👍 84%</span>
+      <span class="dislike">👎 16%</span>
+    </div>
+  </div>
+</div>
 
-        if (title.includes(value)) {
-          card.style.display = 'block';
-        } else {
-          card.style.display = 'none';
-        }
-      });
-    });
+<div class="game-card">
+  <img src="https://upload.wikimedia.org/wikipedia/en/8/8b/Baldi%27s_Basics_cover.jpg">
+  <div class="card-content">
+    <h3>Baldi's Basics</h3>
+    <button class="play-btn">Play</button>
+    <div class="rating-row">
+      <span class="like">👍 82%</span>
+      <span class="dislike">👎 18%</span>
+    </div>
+  </div>
+</div>
 
-    function openGame(url) {
-      modal.style.display = 'flex';
-      frame.src = url;
-    }
+</section>
 
-    function fullscreenGame() {
-      if (frame.requestFullscreen) {
-        frame.requestFullscreen();
-      }
-    }
+</main>
 
-    function closeGame() {
-      modal.style.display = 'none';
-      frame.src = '';
-    }
+<div class="modal" id="gameModal">
+  <div class="modal-content">
+    <div class="modal-top">
+      <h3>Arcadex</h3>
+      <button class="close-btn" onclick="closeGame()">Close</button>
+    </div>
 
-    function voteGame(btn, type) {
-      const card = btn.closest('.game-card');
-      const likeBtn = card.querySelector('.like-btn');
-      const dislikeBtn = card.querySelector('.dislike-btn');
+    <iframe id="gameFrame"></iframe>
+  </div>
+</div>
 
-      const likeCount = likeBtn.querySelector('.count');
-      const dislikeCount = dislikeBtn.querySelector('.count');
+<script>
+const searchInput = document.getElementById('searchInput');
+const cards = document.querySelectorAll('.game-card');
 
-      let voted = card.dataset.vote || '';
-
-      if (type === 'like') {
-        if (voted === 'like') return;
-
-        if (voted === 'dislike') {
-          dislikeCount.textContent = Number(dislikeCount.textContent) - 1;
-          dislikeBtn.classList.remove('active-dislike');
-        }
-
-        likeCount.textContent = Number(likeCount.textContent) + 1;
-        likeBtn.classList.add('active-like');
-        dislikeBtn.classList.remove('active-dislike');
-        card.dataset.vote = 'like';
-      }
-
-      if (type === 'dislike') {
-        if (voted === 'dislike') return;
-
-        if (voted === 'like') {
-          likeCount.textContent = Number(likeCount.textContent) - 1;
-          likeBtn.classList.remove('active-like');
-        }
-
-        dislikeCount.textContent = Number(dislikeCount.textContent) + 1;
-        dislikeBtn.classList.add('active-dislike');
-        likeBtn.classList.remove('active-like');
-        card.dataset.vote = 'dislike';
-      }
-
-      sortGames();
-    }
-
-    function sortGames() {
-      const grid = document.getElementById('gamesGrid');
-      const cards = [...document.querySelectorAll('.game-card')];
-
-      cards.sort((a, b) => {
-        const aLikes = Number(a.querySelector('.like-btn .count').textContent);
-        const bLikes = Number(b.querySelector('.like-btn .count').textContent);
-        return bLikes - aLikes;
-      });
-
-      cards.forEach(card => grid.appendChild(card));
-    }
-
-    function filterGames(category) {
-      gameCards.forEach(card => {
-        if (category === 'all') {
-          card.style.display = 'block';
-        } else {
-          card.style.display = card.dataset.category === category ? 'block' : 'none';
-        }
-      });
-    }
-  </script>
-
-</body>
-</html>
+searchInput.addEventListener('inp
