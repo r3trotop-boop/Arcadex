@@ -59,6 +59,9 @@
     }
 
     .games-grid {
+      max-width: 1400px;
+      margin: auto;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 20px;
@@ -81,6 +84,19 @@
       border-color: rgba(96,165,250,0.35);
     }
 
+    .game-card {
+      position: relative;
+    }
+
+    .game-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
+      z-index: 1;
+      pointer-events: none;
+    }
+
     .game-card img {
       width: 100%;
       height: 140px;
@@ -88,6 +104,8 @@
     }
 
     .game-info {
+      position: relative;
+      z-index: 2;
       padding: 15px;
     }
 
@@ -104,6 +122,10 @@
       color: white;
       text-decoration: none;
       transition: 0.2s ease;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
       font-weight: bold;
       width: 100%;
       text-align: center;
@@ -127,6 +149,10 @@
       color: white;
       cursor: pointer;
       transition: 0.2s ease;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
       font-weight: bold;
     }
 
@@ -145,6 +171,29 @@
     }
 
     .modal-content {
+      width: 96%;
+      height: 94%;
+      background: #0b1020;
+      border-radius: 30px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 0 60px rgba(0,0,0,0.6);
+      border: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(20px);
+    }
+
+    .fullscreen-btn {
+      background: linear-gradient(90deg,#2563eb,#7c3aed);
+      border: none;
+      color: white;
+      padding: 10px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+
+    .modal-content-old {
       width: 90%;
       height: 85%;
       background: #111827;
@@ -211,6 +260,12 @@
       object-fit: cover;
     }
 
+    .rating-bar {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
     .like-btn, .dislike-btn {
       flex: 1;
       border: none;
@@ -221,6 +276,10 @@
       background: rgba(255,255,255,0.08);
       color: white;
       transition: 0.2s ease;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:8px;
     }
 
     .like-btn:hover {
@@ -243,7 +302,7 @@
 
   <header>
     <h1>Arcadex</h1>
-    <p>Premium browser gaming platform</p>
+    <p>Next-generation browser gaming platform</p>
   </header>
 
   <nav style="display:flex;justify-content:center;gap:15px;padding:18px;background:rgba(15,23,42,0.75);flex-wrap:wrap;border-bottom:1px solid rgba(255,255,255,0.06);">
@@ -257,8 +316,13 @@
   <div style="max-width:1200px;margin:auto;padding-top:20px;">
   <section style="display:grid;grid-template-columns:2fr 1fr;gap:20px;padding:20px;align-items:center;">
     <div style="padding:30px;background:rgba(31,41,55,0.8);border-radius:28px;border:1px solid rgba(255,255,255,0.06);box-shadow:0 15px 40px rgba(0,0,0,0.35);">
-      <h2 style="font-size:2.4rem;margin-bottom:12px;">Play Top Browser Games Instantly</h2>
-      <p style="color:#cbd5e1;font-size:1.05rem;line-height:1.6;">Discover trending games, retro classics, horror games, sandbox worlds, and fan favorites — all in one sleek platform.</p>
+      <h2 style="font-size:3rem;margin-bottom:14px;font-weight:900;line-height:1.1;">The Ultimate Browser Arcade Experience</h2>
+      <p style="color:#cbd5e1;font-size:1.1rem;line-height:1.8;max-width:700px;">Arcadex delivers a polished gaming experience with immersive fullscreen play, animated UI, trending browser games, smooth transitions, and a modern premium interface designed to feel like a real gaming platform.</p>
+
+      <div style="display:flex;gap:14px;margin-top:24px;flex-wrap:wrap;">
+        <button style="padding:14px 22px;border:none;border-radius:16px;background:linear-gradient(90deg,#3b82f6,#8b5cf6);color:white;font-weight:800;font-size:1rem;cursor:pointer;box-shadow:0 10px 25px rgba(59,130,246,0.35);">Play Trending Games</button>
+        <button style="padding:14px 22px;border:1px solid rgba(255,255,255,0.1);border-radius:16px;background:rgba(255,255,255,0.04);color:white;font-weight:700;font-size:1rem;cursor:pointer;">Explore Library</button>
+      </div>
     </div>
 
     <div style="padding:24px;background:rgba(31,41,55,0.8);border-radius:28px;border:1px solid rgba(255,255,255,0.06);text-align:center;">
@@ -287,6 +351,20 @@
           <img src="https://upload.wikimedia.org/wikipedia/en/8/8b/Baldi%27s_Basics_cover.jpg" class="slide-img">
           <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2231450/header.jpg" class="slide-img">
           <img src="https://play-lh.googleusercontent.com/GdCAR2R1l0cWlKjv8s0VhX0zYzT7KQ8zTz0nG0L7d5Hj4I7w6p7u0VY0WQYbT8R4gA" class="slide-img">
+        <div class="rating-bar">
+          <button class="like-btn" onclick="likeGame(this)">
+            <span class="emoji">👍</span>
+            <span class="label">Like</span>
+            <span class="count">0</span>
+          </button>
+
+          <button class="dislike-btn" onclick="dislikeGame(this)">
+            <span class="emoji">👎</span>
+            <span class="label">Dislike</span>
+            <span class="count">0</span>
+          </button>
+        </div>
+
         <div style="display:flex;gap:10px;margin-top:12px;">
           <button class="like-btn" onclick="likeGame(this)">👍 <span>0</span></button>
           <button class="dislike-btn" onclick="dislikeGame(this)">👎 <span>0</span></button>
@@ -351,7 +429,10 @@
     <div class="modal-content">
       <div class="modal-top">
         <h2 id="gameTitle">Now Playing</h2>
-        <button class="close-btn" onclick="closeGame()">Close</button>
+        <div style="display:flex;gap:10px;">
+          <button class="fullscreen-btn" onclick="fullscreenGame()">Fullscreen</button>
+          <button class="close-btn" onclick="closeGame()">Close</button>
+        </div>
       </div>
       <iframe id="gameFrame" src=""></iframe>
     </div>
@@ -386,19 +467,35 @@
       frame.src = url;
     }
 
+    function fullscreenGame() {
+      if (frame.requestFullscreen) {
+        frame.requestFullscreen();
+      }
+    }
+
     function closeGame() {
       modal.style.display = 'none';
       frame.src = '';
     }
 
     function likeGame(btn) {
-      const count = btn.querySelector('span');
+      const count = btn.querySelector('.count');
       count.textContent = Number(count.textContent) + 1;
+
+      btn.style.transform = 'scale(1.05)';
+      setTimeout(() => {
+        btn.style.transform = 'scale(1)';
+      }, 120);
     }
 
     function dislikeGame(btn) {
-      const count = btn.querySelector('span');
+      const count = btn.querySelector('.count');
       count.textContent = Number(count.textContent) + 1;
+
+      btn.style.transform = 'scale(1.05)';
+      setTimeout(() => {
+        btn.style.transform = 'scale(1)';
+      }, 120);
     }
 
     function filterGames(category) {
@@ -411,6 +508,10 @@
       });
     }
   </script>
+
+</body>
+</html>
+
 
 </body>
 </html>
