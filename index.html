@@ -104,29 +104,10 @@ main{
   color:white;
   font-weight:bold;
   cursor:pointer;
-  font-size:1rem;
 }
 
 .play-btn:hover{
   background:#7380ff;
-}
-
-.vote-box{
-  display:flex;
-  gap:15px;
-  margin-top:20px;
-}
-
-.vote{
-  flex:1;
-  background:#1a2547;
-  padding:14px;
-  border-radius:14px;
-  text-align:center;
-}
-
-.vote h3{
-  font-size:1.6rem;
 }
 
 .games-grid{
@@ -163,19 +144,23 @@ main{
 
 .rating-row{
   display:flex;
-  justify-content:space-between;
+  gap:10px;
   margin-top:12px;
-  color:#b6bdd3;
-  font-size:0.95rem;
 }
 
-.like{
-  color:#4ade80;
+.like-btn, .dislike-btn{
+  flex:1;
+  border:none;
+  padding:10px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:bold;
+  background:#1a2547;
+  color:white;
 }
 
-.dislike{
-  color:#f87171;
-}
+.like-btn:hover{ background:#1f3d2a; }
+.dislike-btn:hover{ background:#3d1f1f; }
 
 .modal{
   position:fixed;
@@ -218,12 +203,6 @@ iframe{
   border-radius:10px;
   cursor:pointer;
 }
-
-@media(max-width:900px){
-  .top-game{
-    grid-template-columns:1fr;
-  }
-}
 </style>
 </head>
 
@@ -232,7 +211,6 @@ iframe{
 <header>
   <div class="topbar">
     <div class="logo">Arcadex</div>
-
     <div class="search">
       <input type="text" id="searchInput" placeholder="Search games...">
     </div>
@@ -241,125 +219,138 @@ iframe{
 
 <main>
 
-<section class="top-game">
-  <img src="https://images.crazygames.com/games/smash-karts/cover-1654691343472.png" alt="Smash Karts">
-
-  <div class="top-info">
-    <h2>Smash Karts</h2>
-
-    <p>
-      Fast-paced multiplayer kart battles with weapons and online matches.
-    </p>
-
-    <button class="play-btn" onclick="openGame('https://example.com')">
-      Play Game
-    </button>
-
-    <div class="vote-box">
-      <div class="vote">
-        <h3 class="like">89%</h3>
-        <p>12,458 Likes</p>
-      </div>
-
-      <div class="vote">
-        <h3 class="dislike">11%</h3>
-        <p>1,554 Dislikes</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 <section class="games-grid" id="gamesGrid">
 
-<div class="game-card">
-  <img src="https://images.crazygames.com/games/slope/cover-1589733217181.png">
-  <div class="card-content">
-    <h3>Slope</h3>
-    <button class="play-btn">Play</button>
-    <div class="rating-row">
-      <span class="like">👍 88%</span>
-      <span class="dislike">👎 12%</span>
-    </div>
-  </div>
-</div>
+  <!-- SLOPE -->
+  <div class="game-card">
+    <img src="https://images.crazygames.com/games/slope/cover-1589733217181.png">
+    <div class="card-content">
+      <h3>Slope</h3>
+      <button class="play-btn" onclick="openGame('https://example.com')">Play</button>
 
-<div class="game-card">
-  <img src="https://images.crazygames.com/games/1v1-lol/cover-1589887571080.png">
-  <div class="card-content">
-    <h3>1v1.LOL</h3>
-    <button class="play-btn">Play</button>
-    <div class="rating-row">
-      <span class="like">👍 86%</span>
-      <span class="dislike">👎 14%</span>
+      <div class="rating-row">
+        <button class="like-btn" onclick="vote('slope','like')">
+          👍 <span id="like-slope">0</span>
+        </button>
+        <button class="dislike-btn" onclick="vote('slope','dislike')">
+          👎 <span id="dislike-slope">0</span>
+        </button>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="game-card">
-  <img src="https://images.crazygames.com/games/retro-bowl/cover-1674133099913.png">
-  <div class="card-content">
-    <h3>Retro Bowl</h3>
-    <button class="play-btn">Play</button>
-    <div class="rating-row">
-      <span class="like">👍 85%</span>
-      <span class="dislike">👎 15%</span>
-    </div>
-  </div>
-</div>
+  <!-- 1V1 LOL -->
+  <div class="game-card">
+    <img src="https://images.crazygames.com/games/1v1-lol/cover-1589887571080.png">
+    <div class="card-content">
+      <h3>1v1.LOL</h3>
+      <button class="play-btn" onclick="openGame('https://example.com')">Play</button>
 
-<div class="game-card">
-  <img src="https://images.crazygames.com/games/tunnel-rush/cover-1648041061062.png">
-  <div class="card-content">
-    <h3>Tunnel Rush</h3>
-    <button class="play-btn">Play</button>
-    <div class="rating-row">
-      <span class="like">👍 83%</span>
-      <span class="dislike">👎 17%</span>
+      <div class="rating-row">
+        <button class="like-btn" onclick="vote('lol','like')">
+          👍 <span id="like-lol">0</span>
+        </button>
+        <button class="dislike-btn" onclick="vote('lol','dislike')">
+          👎 <span id="dislike-lol">0</span>
+        </button>
+      </div>
     </div>
   </div>
-</div>
 
-<div class="game-card">
-  <img src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/2231450/header.jpg">
-  <div class="card-content">
-    <h3>Pizza Tower Demo</h3>
-    <button class="play-btn">Play</button>
-    <div class="rating-row">
-      <span class="like">👍 84%</span>
-      <span class="dislike">👎 16%</span>
-    </div>
-  </div>
-</div>
+  <!-- RETRO BOWL -->
+  <div class="game-card">
+    <img src="https://images.crazygames.com/games/retro-bowl/cover-1674133099913.png">
+    <div class="card-content">
+      <h3>Retro Bowl</h3>
+      <button class="play-btn" onclick="openGame('https://example.com')">Play</button>
 
-<div class="game-card">
-  <img src="https://upload.wikimedia.org/wikipedia/en/8/8b/Baldi%27s_Basics_cover.jpg">
-  <div class="card-content">
-    <h3>Baldi's Basics</h3>
-    <button class="play-btn">Play</button>
-    <div class="rating-row">
-      <span class="like">👍 82%</span>
-      <span class="dislike">👎 18%</span>
+      <div class="rating-row">
+        <button class="like-btn" onclick="vote('retro','like')">
+          👍 <span id="like-retro">0</span>
+        </button>
+        <button class="dislike-btn" onclick="vote('retro','dislike')">
+          👎 <span id="dislike-retro">0</span>
+        </button>
+      </div>
     </div>
   </div>
-</div>
 
 </section>
 
 </main>
 
+<!-- MODAL -->
 <div class="modal" id="gameModal">
   <div class="modal-content">
     <div class="modal-top">
       <h3>Arcadex</h3>
       <button class="close-btn" onclick="closeGame()">Close</button>
     </div>
-
     <iframe id="gameFrame"></iframe>
   </div>
 </div>
 
 <script>
+// SEARCH
 const searchInput = document.getElementById('searchInput');
 const cards = document.querySelectorAll('.game-card');
 
-searchInput.addEventListener('inp
+searchInput.addEventListener('input', function () {
+  const value = this.value.toLowerCase();
+
+  cards.forEach(card => {
+    const title = card.querySelector('h3').innerText.toLowerCase();
+    card.style.display = title.includes(value) ? 'block' : 'none';
+  });
+});
+
+// MODAL
+const modal = document.getElementById('gameModal');
+const frame = document.getElementById('gameFrame');
+
+function openGame(url){
+  frame.src = url;
+  modal.style.display = "flex";
+}
+
+function closeGame(){
+  modal.style.display = "none";
+  frame.src = "";
+}
+
+modal.addEventListener('click', (e)=>{
+  if(e.target === modal) closeGame();
+});
+
+// VOTING SYSTEM (REAL LOCAL STORAGE)
+function getVotes(game){
+  return JSON.parse(localStorage.getItem("votes_" + game)) || {like:0, dislike:0};
+}
+
+function saveVotes(game, data){
+  localStorage.setItem("votes_" + game, JSON.stringify(data));
+  updateUI(game);
+}
+
+function vote(game, type){
+  let data = getVotes(game);
+  data[type] += 1;
+  saveVotes(game, data);
+}
+
+function updateUI(game){
+  let data = getVotes(game);
+
+  let likeEl = document.getElementById("like-" + game);
+  let dislikeEl = document.getElementById("dislike-" + game);
+
+  if(likeEl) likeEl.innerText = data.like;
+  if(dislikeEl) dislikeEl.innerText = data.dislike;
+}
+
+// INIT
+["slope","lol","retro"].forEach(updateUI);
+</script>
+
+</body>
+</html>
